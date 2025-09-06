@@ -1,0 +1,54 @@
+import numpy as np
+
+def Matrix_Creator():
+    dim = int(input("How many dimensions(This is asking if you want a 1 for 1D, 2 for 2D, 3 for 3D, etc) do you want matrix 1: "))
+    shape = tuple(int(input(f"Enter length(Depending on what the dimension is it'll ask rows then columns then matrices so on) {i + 1}: ")) for i in range(dim))
+    elements = np.prod(shape)
+    values = [int(input(f"Enter value {i + 1}/{elements}: ")) for i in range(elements)]
+    arr1 = np.array(values).reshape(shape)
+
+    dim = int(input("How many dimension do you want matrix 2: "))
+    shape = tuple(int(input(f"Enter length(Depending on what the dimension is it'll ask rows then columns then matrices so on) {i + 1}: ")) for i in range(dim))
+    elements = np.prod(shape)
+    values = [int(input(f"Enter value {i + 1}/{elements}: ")) for i in range(elements)]
+    arr2 = np.array(values).reshape(shape)
+    return arr1, arr2
+
+def Matrix_Calculator():
+    try:
+        if op_input in (1, 2, 3):
+            arr1, arr2 = Matrix_Creator() 
+
+            if op_input == 1:
+                print(arr1 + arr2)
+                
+            elif op_input == 2:
+                print(arr1 - arr2)
+                
+            elif op_input == 3:
+                print(np.dot(arr1, arr2))
+
+        elif op_input in (4, 5):
+            dim = int(input("How many dimensions(This is asking if you want a 1 for 1D, 2 for 2D, 3 for 3D, etc) do you want matrix 1: "))
+            shape = tuple(int(input(f"Enter length(Depending on what the dimension is it'll ask rows then columns then matrices so on) {i + 1}: ")) for i in range(dim))
+            elements = np.prod(shape)
+            values = [int(input(f"Enter value {i + 1}/{elements}: ")) for i in range(elements)]
+            arr1 = np.array(values).reshape(shape)
+
+        if op_input == 5:    
+            print(np.linalg.inv(arr1))
+            
+        if op_input == 4:    
+            print(round(np.linalg.det(arr1)))
+        
+    except ValueError:
+        print("You cannot input a space or a letter")
+    
+y_n = input("Would you like to use the matrix calculator(Lowercase y or n): ")
+while y_n == "y":
+    op_input = int(input("What operation would you like to preform(Enter 1 for Addition, 2 for Subtraction, 3 for Multiplication, 4 for Determinant and 5 for Inverse): "))
+    Matrix_Calculator()
+    y_n = input("Would you like to use the matrix calculator(Lowercase y or n, default is no): ")
+    if y_n == "n":
+        print("Bye! ")
+        break
